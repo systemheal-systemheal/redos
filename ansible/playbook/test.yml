@@ -1,0 +1,17 @@
+---
+
+- name: configure browser proxy
+  hosts: all
+  remote_user: root
+
+  tasks:
+    - name: Copying katusha drivers package
+      ansible.builtin.copy:
+        src: /root/soft/katusha_drivers/katusha-m348-ps-1.3.2.x86_64.rpm
+        dest: /root/soft/kyocera_drivers/katusha-m348-ps-1.3.2.x86_64.rpm
+        mode: +x
+
+    - name: install katusha driver
+      ansible.builtin.shell: dnf install -y /root/soft/kyocera_drivers/katusha-m348-ps-1.3.2.x86_64.rpm
+      args:
+        executable: /bin/bash

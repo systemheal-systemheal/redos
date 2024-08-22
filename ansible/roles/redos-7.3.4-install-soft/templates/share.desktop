@@ -1,0 +1,6 @@
+[Desktop Entry]
+ Name=share
+ Type=Application
+ Exec=gio mount smb://dc.kuznetsk-dobycha.gazprom.ru/share/
+ Terminal=false
+
