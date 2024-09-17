@@ -1,0 +1,17 @@
+---
+
+- hosts: all
+  remote_user: administrator
+  become: true
+
+  tasks:
+    - name: copying folder new version r7_office.rpm to remote host
+      ansible.builtin.copy:
+        src: /etc/ansible/roles/redos-7.3.4-install-soft/files/soft/r7_office/r7-office-2024.3.2-551.el8.x86_64.rpm
+        dest: /opt
+
+    - name: install r7 office
+      ansible.builtin.shell: dnf install -y /opt/r7-office-2024.3.2-551.el8.x86_64.rpm
+      args:
+        executable: /bin/bash
+
