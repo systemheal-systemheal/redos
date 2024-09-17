@@ -1,5 +1,0 @@
-[Desktop Entry]
- Name=info
- Type=Application
- Exec=gio mount smb://dc.kuznetsk-dobycha.gazprom.ru/info/
- Terminal=false
