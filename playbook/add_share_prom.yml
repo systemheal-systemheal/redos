@@ -1,0 +1,31 @@
+---
+
+- hosts: all
+  gather_facts: no
+  remote_user: administrator
+  become: true
+
+  tasks:
+    - name: Copy template department-prom
+      ansible.builtin.copy:
+        src: /etc/ansible/roles/redos-7.3.4-install-soft/templates/department-prom.desktop
+        dest: /etc/xdg/autostart
+
+    - name: Copy template info-prom
+      ansible.builtin.copy:
+        src: /etc/ansible/roles/redos-7.3.4-install-soft/templates/info-prom.desktop
+        dest: /etc/xdg/autostart
+
+    - name: Copy template share-prom
+      ansible.builtin.copy:
+        src: /etc/ansible/roles/redos-7.3.4-install-soft/templates/share-prom.desktop
+        dest: /etc/xdg/autostart
+
+    - name: copy reconnect-share shell file
+      ansible.builtin.copy:
+        src: /etc/ansible/roles/redos-7.3.4-install-soft/files/scripts/reconnect-share/reconnect-share.sh
+        dest: /usr/bin/
+        owner: root
+        group: root
+        mode: u+rx,g+rx,o+rx
+

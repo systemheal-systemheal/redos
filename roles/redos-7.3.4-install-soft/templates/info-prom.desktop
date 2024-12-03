@@ -1,0 +1,5 @@
+[Desktop Entry]
+ Name=info
+ Type=Application
+ Exec=gio mount smb://dc3p.kuznetsk-dobycha.gazprom.ru/info-prom/
+ Terminal=false

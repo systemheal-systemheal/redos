@@ -1,0 +1,19 @@
+---
+# tasks file for install-ius-certificates
+- name: Copying IUS certificates (CNTR, SUB)
+  ansible.builtin.copy:
+    src: files/ius-certificates/
+    dest: /etc/pki/ca-trust/source/anchors/
+    owner: root
+    group: root
+    mode: '755'
+
+- name: Copying root certificates for citrix
+  ansible.builtin.shell: cp -vf /etc/pki/ca-trust/source/anchors/127.0.0.1.key /etc/pki && rm -rf /etc/pki/ca-trust/source/anchors/127.0.0.1.key && cp -vf /etc/pki/ca-trust/source/anchors/127.0.0.1.crt /etc/pki && cp -vf /etc/pki/127.0.0.1.crt /opt/Citrix/ICAClient/keystore/cacerts/127.0.0.1.pem
+  args:
+    executable: /bin/bash
+
+- name: Launch citrix_rehash to update certificates and restart ius services
+  ansible.builtin.shell: /opt/Citrix/ICAClient/util/ctx_rehash >> /var/log/citrix-install.log && /usr/bin/update-ca-trust && systemctl restart iuspt-in.service && systemctl restart iuspt-out.service
+  args:
+    executable: /bin/bash

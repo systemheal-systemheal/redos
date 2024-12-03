@@ -1,0 +1,5 @@
+[Desktop Entry]
+ Name=scan
+ Type=Application
+ Exec=gio mount smb://fs-adm.kuznetsk-dobycha.gazprom.ru/scan/
+ Terminal=false

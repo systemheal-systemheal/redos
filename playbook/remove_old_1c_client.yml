@@ -1,0 +1,28 @@
+---
+
+- hosts: all
+  gather_facts: no
+  remote_user: administrator
+  become: true
+
+  tasks:
+    - name: Remove rpm file in /opt/
+      ansible.builtin.shell: rm -rf /opt/*.rpm
+      args:
+        executable: /bin/bash
+
+    - name: remove 1c client 1c-enterprise-8.3.22.2239-thin-client-8.3.22-2239.x86_64
+      ansible.builtin.dnf:
+        name: 1c-enterprise-8.3.22.2239-thin-client-8.3.22-2239.x86_64
+        state: absent
+
+    - name: remove 1c client 1c-enterprise-8.3.24.1586-thin-client-8.3.24-1586.x86_64
+      ansible.builtin.dnf:
+        name: 1c-enterprise-8.3.24.1586-thin-client-8.3.24-1586.x86_64
+        state: absent
+
+    - name: remove 1c client 1c-enterprise-8.3.24.1691-thin-client-8.3.24-1691.x86_64
+      ansible.builtin.dnf:
+        name: 1c-enterprise-8.3.24.1691-thin-client-8.3.24-1691.x86_64
+        state: absent
+

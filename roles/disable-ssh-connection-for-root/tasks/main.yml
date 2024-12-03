@@ -1,0 +1,10 @@
+---
+# tasks file for disable-ssh-connection-for-root
+- name: disable root login
+  ansible.builtin.replace:
+    path: /etc/ssh/sshd_config
+    regexp: '^#PermitRootLogin prohibit-password'
+    replace: "PermitRootLogin no"
+
+  notify:
+    - restart ssh service
