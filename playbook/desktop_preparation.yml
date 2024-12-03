@@ -1,7 +1,0 @@
----
-
-- hosts: all
-  remote_user: administrator
-  become: true
-  roles:
-    - role: desktop-preparation
