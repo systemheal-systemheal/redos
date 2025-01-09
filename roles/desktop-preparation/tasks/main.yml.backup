@@ -6,14 +6,14 @@
     recurse: no
     depth: 1
     file_type: directory
-    patterns: "*kuznetsk-dobycha.gazprom.ru"
+    patterns: "*******"
   register: homedir
 
 - name: configure proxy for browser
   ansible.builtin.blockinfile:
     path: "{{ item.path }}/.bash_profile"
     block: |
-      gsettings set org.gnome.system.proxy ignore-hosts "['localhost', '127.0.0.0/8', '::1', 'exch2013', 'exch2013.kuznetsk-dobycha.gazprom.ru', 'lync2013', 'lync2013.kuznetsk-dobycha.gazprom.ru', 'meet', 'meet.kuznetsk-dobycha.gazprom.ru', 'wi.ctx.codm.gazprom.ru', 'wi-pdn.ctx.codm.gazprom.ru', 'sg.ctx.codm.gazprom.ru', 'sg-pdn.ctx.codm.gazprom.ru', 'portal-gdk', 'phonebook', 'www.adm.gazprom.ru', 'www1.adm.gazprom.ru', 'consultant', 'www1.komplekt.gazprom.ru', '*.gazprom.ru']"
+      gsettings set org.gnome.system.proxy ignore-hosts "['localhost', *******']"
   with_items: "{{ homedir.files }}"
 
 - name: copying fonts for r7 office
