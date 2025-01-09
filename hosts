@@ -41,8 +41,3 @@
 # leading 0s:
 
 ## db-[99:101]-node.example.com
-
-#[new_pk]
-#redostest ansible_host=10.37.11.58 ansible_user=root ansible_ssh_private_key=/root/.ssh/id_rsa
-#[new_pk]
-#10.37.11.58
