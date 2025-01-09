@@ -6,7 +6,7 @@
     recurse: no
     depth: 1
     file_type: directory
-    patterns: "*kuznetsk-dobycha.gazprom.ru"
+    patterns: **********
   register: homedir
 
 - name: copying fonts for r7 office
