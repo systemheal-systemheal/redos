@@ -1,5 +1,0 @@
-[Desktop Entry]
- Name=department
- Type=Application
- Exec=gio mount smb://dc3p.kuznetsk-dobycha.gazprom.ru/department-prom/
- Terminal=false
