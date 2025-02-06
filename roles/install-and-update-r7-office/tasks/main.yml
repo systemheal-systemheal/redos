@@ -1,0 +1,63 @@
+---
+# tasks file for install-and-update-r7-office
+- name: Installation via YUM
+  block:
+    - name: Checking CentOS Version
+      block:
+        - name: Installing rpmfusion
+          ansible.builtin.yum_repository:
+            name: rpmfusion
+            description: RPM Fusion
+            baseurl: https://download1.rpmfusion.org/free/el/7/x86_64/
+            gpgcheck: yes
+            gpgkey: https://download1.rpmfusion.org/RPM-GPG-KEY-rpmfusion-free-el-7
+            enabled: yes
+      when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '9'
+
+    - name: Create a directory for yum repositories
+      ansible.builtin.file:
+        path: /etc/yum.repos.d
+        state: directory
+
+    - name: Adding r7 repository
+      ansible.builtin.yum_repository:
+        name: r7
+        description: r7
+        baseurl: https://downloads.r7-office.ru/repository/r7-desktop-yum/
+        enabled: 1
+        gpgcheck: 1
+        gpgkey: https://download.r7-office.ru/repos/RPM-GPG-KEY-R7-OFFICE.public
+        sslverify: 0
+        username: desktop
+        password: gyxiLab84FByn7sCTd5JY
+
+    - name: Running the yum makecache command
+      yum:
+        update_cache: yes
+        state: present
+
+    - name: Installing/updating r7-office package
+      yum:
+        name: r7-office
+        state: latest
+
+    - name: Creating a license directory
+      ansible.builtin.file:
+        path: /etc/r7-office/license
+        state: directory
+
+    - name: Activation
+      ansible.builtin.copy:
+        src: files/65197.lickey
+        dest: /etc/r7-office/license/65197.lickey
+        mode: '0755'
+
+    - name: copying fonts for r7 office
+      ansible.builtin.copy:
+        src: files/fonts/
+        dest: /usr/share/fonts/r7-office/
+        owner: root
+        group: root
+        mode: '0644'
+
+  when: ansible_distribution == "REDOS" or ansible_distribution == "RED OS" or ansible_pkg_mgr == "dnf" or ansible_pkg_mgr == "yum"

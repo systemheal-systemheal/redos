@@ -1,0 +1,9 @@
+---
+
+- hosts: all
+  gather_facts: no
+  remote_user: administrator
+  become: true
+  roles:
+    - role: install-ius-certificates
+

@@ -1,0 +1,22 @@
+---
+ tasks file for configure-proxy
+- name: configure system proxy
+  ansible.builtin.blockinfile:
+    path: /etc/environment
+    block: |
+      export http_proxy="http://auth.kuznetsk-dobycha.gazprom.ru:3128"
+      export https_proxy="http://auth.kuznetsk-dobycha.gazprom.ru:3128"
+      export no_proxy="127.0.0.1,exch2013,exch2013.kuznetsk-dobycha.gaprom.ru,lync2013,lync2013.kuznetsk-dobycha.gazprom.ru,meet,meet.kuznetsk-dobycha.gazprom.ru,wi.ctx.codm.gazprom.ru,wi-pdn.ctx.codm.gazprom.ru,sg.ctx.codm.gazprom.ru,sg-pdn.ctx.codm.gazprom.ru,consultant">
+      export HTTP_PROXY="http://auth.kuznetsk-dobycha.gazprom.ru:3128"
+      export HTTPS_PROXY="http://auth.kuznetsk-dobycha.gazprom.ru:3128"
+      export NO_PROXY="127.0.0.1,exch2013,exch2013.kuznetsk-dobycha.gaprom.ru,lync2013,lync2013.kuznetsk-dobycha.gazprom.ru,meet,meet.kuznetsk-dobycha.gazprom.ru,wi.ctx.codm.gazprom.ru,wi-pdn.ctx.codm.gazprom.ru,sg.ctx.codm.gazprom.ru,sg-pdn.ctx.codm.gazprom.ru,consultant">
+
+- name: disable selinux
+  ansible.builtin.lineinfile:
+    path: /etc/selinux/config
+    regexp: '^SELINUX='
+    line: SELINUX=disabled
+
+- name: reboot host
+  ansible.builtin.reboot:
+

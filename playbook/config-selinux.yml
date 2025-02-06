@@ -1,0 +1,16 @@
+---
+
+- hosts: all
+  gather_facts: no
+  remote_user: administrator
+  become: true
+
+  tasks:
+    - name: disable selinux
+      ansible.builtin.lineinfile:
+        path: /etc/selinux/config
+        regexp: '^SELINUX='
+        line: SELINUX=disabled
+
+    - name: reboot host
+      ansible.builtin.reboot:

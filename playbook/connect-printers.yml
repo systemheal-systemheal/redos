@@ -1,0 +1,8 @@
+---
+
+- hosts: all
+  gather_facts: no
+  remote_user: administrator
+  become: true
+  roles:
+    - role: connect-to-printers

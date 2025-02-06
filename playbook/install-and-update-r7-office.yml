@@ -1,0 +1,8 @@
+---
+
+- hosts: all
+  gather_facts: yes
+  remote_user: administrator
+  become: true
+  roles:
+    - install-and-update-r7-office

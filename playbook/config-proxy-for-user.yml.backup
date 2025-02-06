@@ -1,0 +1,32 @@
+---
+
+- name: configure system proxy
+  gather_facts: no
+  hosts: all
+  remote_user: administrator
+
+  tasks:
+    - name: configure system proxy
+      ansible.builtin.blockinfile:
+        path: /etc/environment
+        block: |
+          export http_proxy="*****"
+          export https_proxy="*****"
+          export no_proxy="127.0.0.1,*****"
+          export HTTP_PROXY="*****"
+          export HTTPS_PROXY="*****"
+          export NO_PROXY="127.0.0.1,*****"
+
+    - name: disable selinux
+      ansible.builtin.lineinfile:
+        path: /etc/selinux/config
+        regexp: '^SELINUX='
+        line: SELINUX=disabled
+
+    - name: reboot host
+      ansible.builtin.reboot
+
+    - name: test message
+      ansible.builtin.debug:
+        msg:
+        - "Test message"

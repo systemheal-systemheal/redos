@@ -1,0 +1,16 @@
+---
+# tasks file for configure-selinux
+- name: get status selinux
+  ansible.builtin.shell: getenforce
+  args:
+    executable: /bin/bash
+  register: selinux_status
+
+- name: disable selinux, if it is on
+  ansible.posix.selinux:
+    state: disabled
+  when: selinux_status.stdout == 'Enforcing' or selinux_status.stdout == 'Permissive'
+
+- name: reboot host
+  ansible.builtin.reboot:
+  when: selinux_status.stdout == 'Enforcing' or selinux_status.stdout == 'Permissive'

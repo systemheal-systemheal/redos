@@ -1,0 +1,27 @@
+---
+# tasks file for connect-to-printers
+- name: connect to SAMOIS mfu
+  ansible.builtin.shell: lpadmin -p SAMOIS -v ipp://*****:631/ipp -m everywhere -E
+  args:
+    executable: /bin/bash
+
+- name: connect to VOZLEBUHSKZ mfu
+  ansible.builtin.shell: lpadmin -p VOZLEBUHSKZ -v ipp://*****:631/ipp -m everywhere -E
+  args:
+    executable: /bin/bash
+
+- name: connect to PEOFO mfu
+  ansible.builtin.shell: lpadmin -p PEOFO -v ipp://*****:631/ipp -m everywhere -E
+  args:
+    executable: /bin/bash
+
+- name: connect to OK mfu
+  ansible.builtin.shell: lpadmin -p OK -v  ipp://*****:631/ipp -m everywhere -E
+  args:
+    executable: /bin/bash
+
+- name: connect to TO mfu
+  ansible.builtin.shell: lpadmin -p TO -v  ipp://*****:631/ipp -m everywhere -E
+  args:
+    executable: /bin/bash
+

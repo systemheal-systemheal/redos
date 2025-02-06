@@ -1,0 +1,7 @@
+---
+# handlers file for disable-ssh-connection-for-root
+- name: restart ssh service
+  ansible.builtin.shell: systemctl restart sshd.service
+  args:
+    executable: /bin/bash
+
